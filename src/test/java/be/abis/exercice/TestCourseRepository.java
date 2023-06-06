@@ -4,17 +4,15 @@ import be.abis.exercice.repository.CourseRepository;
 import be.abis.exercice.repository.MemoryCourseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+@SpringBootTest
 public class TestCourseRepository {
 	
+	@Autowired
 	CourseRepository cr;
-	
-	@BeforeEach
-	public void setUp() {
-		cr = new MemoryCourseRepository();
-	}
 	
 	@Test
 	public void numberOfCoursesInMemoryIs5() {

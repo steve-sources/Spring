@@ -3,23 +3,40 @@ package be.abis.exercice.repository;
 import be.abis.exercice.model.Address;
 import be.abis.exercice.model.Company;
 import be.abis.exercice.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 @Repository
-@ConditionalOnResource(resources="file:/temp/javacourses/personsSpring.csv")
+//@ConditionalOnResource(resources="file:/temp/javacourses/personsSpring.csv")
+@ConditionalOnResource(resources="file:${personfile}")
 public class FilePersonRepository implements PersonRepository {
 
+	@Value("${personfile}")
+	private String fileLoc="";
+
 	private ArrayList<Person> allPersons;
-	private String fileLoc = "/temp/javacourses/personsSpring.csv";
+	//private String fileLoc = "/temp/javacourses/personsSpring.csv";
+
+
 
 	public FilePersonRepository() {
 		System.out.println("Passe dans la version normal");
+
 		allPersons = new ArrayList<Person>();
+		//this.readFile();
+	}
+
+	@PostConstruct
+	public void init(){
+		System.out.println("test : " + fileLoc);
 		this.readFile();
 	}
 
