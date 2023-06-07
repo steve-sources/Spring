@@ -1,6 +1,7 @@
 package be.abis.exercice.repository;
 
 import be.abis.exercice.model.Course;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 
 @Component
+@Profile("dev")
 public class MemoryCourseRepository implements CourseRepository {
 	
 	private ArrayList<Course> courses = new ArrayList<Course>();
